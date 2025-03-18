@@ -2,6 +2,7 @@
 {
     public class InvoiceHeader
     {
+        public int Id { get; set; }
         public string InvoiceId { get; private set; }
         public string SenderTitle { get; private set; }
         public string ReceiverTitle { get; private set; }

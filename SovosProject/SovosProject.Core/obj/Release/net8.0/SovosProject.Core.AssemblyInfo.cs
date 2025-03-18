@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SovosProject.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11e174917abc7529620ef3eb9a53acc12f7334f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6421f2a2ab0a04472d0505064c4935d9434dbcff")]
 [assembly: System.Reflection.AssemblyProductAttribute("SovosProject.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SovosProject.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
