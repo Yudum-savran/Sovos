@@ -1,22 +1,33 @@
-﻿using SovosProject.Core.Aggregates.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SovosProject.Core.Aggregates.Entities;
+using SovosProject.Infrastructure.Data;
 
 namespace SovosProject.Infrastructure.Repository
 {
     public class InvoiceRepository : IInvoiceRepository
     {
-        public Task AddAsync(InvoiceHeader invoice)
+        private readonly SovosProjectDbContext _context;
+
+        public InvoiceRepository(SovosProjectDbContext context)
         {
-            throw new NotImplementedException();
+            _context=context;
         }
 
-        public Task<List<InvoiceHeader>> GetAllAsync()
+        public async Task AddAsync(InvoiceHeader invoice)
         {
-            throw new NotImplementedException();
+            await _context.InvoiceHeaders.AddAsync(invoice);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<InvoiceHeader?> GetByIdAsync(string invoiceId)
+        public async Task<List<InvoiceHeader>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.InvoiceHeaders.Include(i => i.InvoiceLines).ToListAsync();
+        }
+
+        public async Task<InvoiceHeader?> GetByIdAsync(string invoiceId)
+        {
+            return await _context.InvoiceHeaders.Include(i => i.InvoiceLines)
+             .FirstOrDefaultAsync(i => i.InvoiceId == invoiceId);
         }
 
         public Task<List<InvoiceHeader>> GetUnprocessedInvoicesAsync()
@@ -24,9 +35,10 @@ namespace SovosProject.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(InvoiceHeader invoice)
+        public async Task UpdateAsync(InvoiceHeader invoice)
         {
-            throw new NotImplementedException();
+            _context.InvoiceHeaders.Update(invoice);
+            await _context.SaveChangesAsync();
         }
     }
 }
