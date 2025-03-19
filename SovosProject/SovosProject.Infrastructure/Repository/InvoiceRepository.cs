@@ -30,11 +30,6 @@ namespace SovosProject.Infrastructure.Repository
              .FirstOrDefaultAsync(i => i.InvoiceId == invoiceId);
         }
 
-        public Task<List<InvoiceHeader>> GetUnprocessedInvoicesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task UpdateAsync(InvoiceHeader invoice)
         {
             _context.InvoiceHeaders.Update(invoice);

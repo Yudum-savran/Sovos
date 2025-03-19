@@ -7,7 +7,6 @@ namespace SovosProject.Infrastructure.Repository
         Task AddAsync(InvoiceHeader invoice);
         Task<List<InvoiceHeader>> GetAllAsync();
         Task<InvoiceHeader?> GetByIdAsync(string invoiceId);
-        Task<List<InvoiceHeader>> GetUnprocessedInvoicesAsync();
         Task UpdateAsync(InvoiceHeader invoice);
     }
 }
