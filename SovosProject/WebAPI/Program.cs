@@ -15,6 +15,7 @@ builder.Services.AddDbContext<SovosProjectDbContext>(options =>
 
 builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddAutoMapper(typeof(SovosProject.Application.AutoMappers.AutoMapper));
 builder.Services.AddValidatorsFromAssemblyContaining<InvoiceValidator>();
 
