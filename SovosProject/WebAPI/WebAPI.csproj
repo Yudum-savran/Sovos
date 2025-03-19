@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SovosProject.Application\SovosProject.Application.csproj" />
     <ProjectReference Include="..\SovosProject.Infrastructure\SovosProject.Infrastructure.csproj" />
   </ItemGroup>
 

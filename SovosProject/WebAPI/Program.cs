@@ -1,11 +1,15 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SovosProject.Application.Interfaces;
+using SovosProject.Application.Services;
 using SovosProject.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<SovosProjectDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));  // Veritaban? ba?lant?s?
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));  // Veritabanı bağlantısı
+
+builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
