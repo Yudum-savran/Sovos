@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using SovosProject.Application.Interfaces;
 using SovosProject.Application.Services;
+using SovosProject.Application.Validators;
 using SovosProject.Infrastructure.Data;
 using SovosProject.Infrastructure.Repository;
 
@@ -12,6 +14,8 @@ builder.Services.AddDbContext<SovosProjectDbContext>(options =>
 
 builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddAutoMapper(typeof(SovosProject.Application.AutoMappers.AutoMapper));
+builder.Services.AddValidatorsFromAssemblyContaining<InvoiceValidator>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
