@@ -2,7 +2,7 @@
 using SovosProject.Application.Interfaces;
 using SovosProject.Application.Models;
 using SovosProject.Core.Aggregates.Entities;
-using SovosProject.Infrastructure.Repository;
+using SovosProject.Core.Repository;
 
 namespace SovosProject.Application.Services
 {

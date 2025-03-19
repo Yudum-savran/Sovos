@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SovosProject.Application.Interfaces;
 using SovosProject.Application.Services;
 using SovosProject.Application.Validators;
+using SovosProject.Core.Repository;
 using SovosProject.Infrastructure.Data;
 using SovosProject.Infrastructure.Repository;
 
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<SovosProjectDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));  // Veritabanı bağlantısı
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
