@@ -1,10 +1,5 @@
-﻿using Microsoft.Extensions.Options;
-using MimeKit;
-using SovosProject.Application.Email;
-using SovosProject.Application.Interfaces;
-using MailKit.Net.Smtp;
+﻿using SovosProject.Application.Interfaces;
 using SovosProject.Application.Models;
-using SovosProject.Core.Entities;
 using SovosProject.Core.Repository;
 
 
