@@ -6,6 +6,7 @@ using MailKit.Net.Smtp;
 using SovosProject.Application.Models;
 using SovosProject.Core.Entities;
 using SovosProject.Core.Repository;
+using SovosProject.Application.Common;
 
 
 namespace SovosProject.Application.Services
@@ -21,10 +22,13 @@ namespace SovosProject.Application.Services
             _emailService=emailService;
         }
 
-        public async Task InvoiceSendEmailAsync(InvoiceMailLogDto invoiceMailLogDto)
+        public async Task<GenericResult<bool>> InvoiceSendEmailAsync(InvoiceMailLogDto invoiceMailLogDto)
         {
 
             var unprocessedInvoices = await _invoiceRepository.GetUnprocessedInvoicesAsync();
+
+            if (unprocessedInvoices == null || !unprocessedInvoices.Any())
+                return GenericResult<bool>.Failure(Error.NotFound("İşlenmemiş fatura bulunamadı."));
 
             foreach (var invoice in unprocessedInvoices)
             {
@@ -44,11 +48,17 @@ namespace SovosProject.Application.Services
                     Body = bodyText
                 };
 
-                await _emailService.SendEmailAsync(mailLogDto);
+                var emailResult = await _emailService.SendEmailAsync(mailLogDto);
+                if (!emailResult.IsSuccess)
+                    return GenericResult<bool>.Failure(emailResult.Error);
+
                 invoice.Processed = "Processed";
                 await _invoiceRepository.UpdateAsync(invoice);
 
             }
+
+            return GenericResult<bool>.Success(true);
+
         }
     }
 }

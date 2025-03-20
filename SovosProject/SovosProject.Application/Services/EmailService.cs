@@ -4,6 +4,7 @@ using SovosProject.Application.Email;
 using SovosProject.Application.Interfaces;
 using SovosProject.Application.Models;
 using MailKit.Net.Smtp;
+using SovosProject.Application.Common;
 
 namespace SovosProject.Application.Services
 {
@@ -16,7 +17,7 @@ namespace SovosProject.Application.Services
             _emailConfig = emailConfig.Value;
         }
 
-        public async Task SendEmailAsync(MailLogDto mailLogDto)
+        public async Task<GenericResult<bool>> SendEmailAsync(MailLogDto mailLogDto)
         {
             var mailMessage = new MimeMessage();
             mailMessage.From.Add(new MailboxAddress("Gönderen", mailLogDto.FromEmail ?? _emailConfig.SenderEmail));
@@ -33,10 +34,12 @@ namespace SovosProject.Application.Services
                 await client.SendAsync(mailMessage);
                 await client.DisconnectAsync(true);
 
+                return GenericResult<bool>.Success(true);
+
             }
             catch (Exception ex)
             {
-                throw new Exception("Mail gönderimi sırasında bir hata oluştu.", ex);
+                return GenericResult<bool>.Failure(Error.InternalServerError($"Email gönderilirken hata alındı. {ex.Message}"));
             }
         }
     }
