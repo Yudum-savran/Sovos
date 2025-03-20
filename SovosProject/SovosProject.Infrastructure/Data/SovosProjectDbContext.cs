@@ -14,10 +14,14 @@ namespace SovosProject.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<InvoiceHeader>()
-        .HasMany(i => i.InvoiceLines)
-        .WithOne(il => il.InvoiceHeader)
-        .HasForeignKey(il => il.InvoiceHeaderId)
-        .OnDelete(DeleteBehavior.Cascade);
-        }
+              .HasMany(i => i.InvoiceLines)
+              .WithOne(il => il.InvoiceHeader)
+              .HasForeignKey(il => il.InvoiceHeaderId)
+              .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<InvoiceHeader>()
+              .Property(i => i.Processed)
+              .HasDefaultValue("Unprocessed");
+       }
     }
 }
