@@ -8,7 +8,7 @@ namespace SovosProject.Application.Validators
         {
             RuleFor(x => x.InvoiceId)
             .NotEmpty().WithMessage("Invoice Id boş olamaz.")
-             .Length(20).WithMessage("Invoice Id en fazla 20 karakter içermeli.");
+             .MaximumLength(20).WithMessage("Invoice Id en fazla 20 karakter içermeli.");
 
             RuleFor(x => x.SenderTitle)
           .NotEmpty().WithMessage("Sender title boş olamaz.");
