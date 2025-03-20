@@ -9,6 +9,6 @@
         public DateTime Date { get;  set; }
         public string Email { get;  set; }
         public List<InvoiceLineDto> InvoiceLines { get; set; } = new();
-        public string IsProcessed { get; set; }
+        public string Processed { get; set; }
     }
 }
