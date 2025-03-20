@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SovosProject.Core.Aggregates.Entities;
+using SovosProject.Core.Entities;
 
 namespace SovosProject.Infrastructure.Data
 {
-    public class SovosProjectDbContext: DbContext
+    public class SovosProjectDbContext : DbContext
     {
         public DbSet<InvoiceHeader> InvoiceHeaders { get; set; }
         public DbSet<InvoiceLine> InvoiceLines { get; set; }
@@ -12,12 +12,11 @@ namespace SovosProject.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<InvoiceHeader>()
-                .HasMany(i => i.InvoiceLines)
-                .WithOne()
-                .HasForeignKey(il => il.InvoiceHeaderId)
-                .OnDelete(DeleteBehavior.Cascade);
+        .HasMany(i => i.InvoiceLines)
+        .WithOne(il => il.InvoiceHeader)
+        .HasForeignKey(il => il.InvoiceHeaderId)
+        .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
