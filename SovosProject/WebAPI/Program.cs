@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 using SovosProject.Application.Email;
 using SovosProject.Application.Interfaces;
 using SovosProject.Application.Services;
@@ -24,6 +25,20 @@ builder.Services.AddTransient<IInvoiceEmailService, InvoiceEmailService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddAutoMapper(typeof(SovosProject.Application.AutoMappers.AutoMapper));
 builder.Services.AddValidatorsFromAssemblyContaining<InvoiceValidator>();
+
+
+// appsettings.json'u yükleyerek konfigürasyonu Serilog'a aktar
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .Build();
+
+// Serilog'u konfigürasyondan oku
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(configuration)
+    .CreateLogger();
+
+// Web uygulamasına Serilog'u dahil et
+builder.Host.UseSerilog();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
