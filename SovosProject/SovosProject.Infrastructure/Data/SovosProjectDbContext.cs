@@ -7,6 +7,7 @@ namespace SovosProject.Infrastructure.Data
     {
         public DbSet<InvoiceHeader> InvoiceHeaders { get; set; }
         public DbSet<InvoiceLine> InvoiceLines { get; set; }
+        public DbSet<MailLog> MailLogs { get; set; }
 
         public SovosProjectDbContext(DbContextOptions<SovosProjectDbContext> options) : base(options) { }
 
