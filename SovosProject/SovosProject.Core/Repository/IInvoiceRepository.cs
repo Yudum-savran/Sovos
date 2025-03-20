@@ -1,4 +1,4 @@
-﻿using SovosProject.Core.Aggregates.Entities;
+﻿using SovosProject.Core.Entities;
 
 namespace SovosProject.Core.Repository
 {
