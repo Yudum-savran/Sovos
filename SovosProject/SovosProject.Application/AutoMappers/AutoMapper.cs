@@ -19,6 +19,9 @@ namespace SovosProject.Application.AutoMappers
 
             CreateMap<InvoiceLineDto, InvoiceLine>()
           .ForMember(dest => dest.Id, opt => opt.Ignore());// ID'yi DB belirleyecek
+
+
+            CreateMap<MailLog, MailLogDto>().ReverseMap();
         }
 
     }
