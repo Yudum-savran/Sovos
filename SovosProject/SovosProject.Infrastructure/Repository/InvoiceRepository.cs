@@ -14,9 +14,9 @@ namespace SovosProject.Infrastructure.Repository
             _context=context;
         }
 
-        public async Task AddAsync(InvoiceHeader invoice)
+        public async Task AddInvoiceAsync(InvoiceHeader invoice)
         {
-            await _context.InvoiceHeaders.AddAsync(invoice);
+            _context.InvoiceHeaders.Add(invoice);
             await _context.SaveChangesAsync();
         }
 
