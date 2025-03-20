@@ -31,6 +31,13 @@ namespace SovosProject.Infrastructure.Repository
              .FirstOrDefaultAsync(i => i.InvoiceId == invoiceId);
         }
 
+        public async Task<List<InvoiceHeader>> GetUnprocessedInvoicesAsync()
+        {
+            return await _context.InvoiceHeaders
+            .Where(invoice => invoice.Processed == "Unprocessed")
+            .ToListAsync();
+        }
+
         public async Task UpdateAsync(InvoiceHeader invoice)
         {
             _context.InvoiceHeaders.Update(invoice);
