@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
             if(!validationResult.IsValid) 
                 throw new ValidationException(validationResult.Errors);
             await _invoiceService.AddInvoiceAsync(value);
-            return CreatedAtAction(nameof(GetInvoiceById), new { id = value.Id }, value);
+            return Ok();
         }
 
         [HttpGet]
