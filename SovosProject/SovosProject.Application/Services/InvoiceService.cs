@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SovosProject.Application.Common;
 using SovosProject.Application.Interfaces;
 using SovosProject.Application.Models;
 using SovosProject.Core.Entities;
@@ -16,57 +17,61 @@ namespace SovosProject.Application.Services
             _invoiceRepository = invoiceRepository;
             _mapper=mapper;
         }
-        public async Task AddInvoiceAsync(InvoiceHeaderDto value)
+        public async Task<GenericResult<bool>> AddInvoiceAsync(InvoiceHeaderDto value)
         {
             try
             {
-                if (value == null) throw new ArgumentNullException(nameof(value), "parameters invoice not found");
+                if (value == null)
+                    return GenericResult<bool>.Failure(Error.BadRequest("Fatura verileri gereklidir."));
+
                 var invoiceHeader = _mapper.Map<InvoiceHeader>(value);
                 await _invoiceRepository.AddInvoiceAsync(invoiceHeader);
+
+                return GenericResult<bool>.Success(true);
             }
             catch (Exception ex)
             {
 
-                throw new Exception("An error occurred while adding the invoice.", ex);
+                return GenericResult<bool>.Failure(Error.InternalServerError($"Fatura eklenirken bir hata oluştu: {ex.Message}"));
             }
         }
 
-        public async Task<List<InvoiceHeaderDto>> GetAllInvoicesAsync()
+        public async Task<GenericResult<List<InvoiceHeaderDto>>> GetAllInvoicesAsync()
         {
             try
             {
                 var invoices = await _invoiceRepository.GetAllAsync();
                 if (invoices == null || !invoices.Any())
-                    return new List<InvoiceHeaderDto>();
+                    return GenericResult<List<InvoiceHeaderDto>>.Failure(Error.NotFound("Fatura bulunamadı."));
 
                 var invoiceDtos = _mapper.Map<List<InvoiceHeaderDto>>(invoices);
-                return invoiceDtos;
-
+                return GenericResult<List<InvoiceHeaderDto>>.Success(invoiceDtos);
             }
             catch (Exception ex)
             {
 
-                throw new Exception("An error occurred while adding the invoice.", ex);
+                return GenericResult<List<InvoiceHeaderDto>>.Failure(Error.InternalServerError($"Faturalar alınırken bir hata oluştu: {ex.Message}"));
             }
         }
 
-        public async Task<InvoiceHeaderDto?> GetInvoiceByIdAsync(string invoiceId)
+        public async Task<GenericResult<InvoiceHeaderDto>> GetInvoiceByIdAsync(string invoiceId)
         {
             try
             {
                 if (string.IsNullOrEmpty(invoiceId))
-                    throw new KeyNotFoundException("Parameters id is null object");
+                    return GenericResult<InvoiceHeaderDto>.Failure(Error.BadRequest("Fatura idsi zorunlu."));
 
                 var invoice = await _invoiceRepository.GetByIdAsync(invoiceId);
-                if (invoice == null) return null;
+                if (invoice == null)
+                    return GenericResult<InvoiceHeaderDto>.Failure(Error.NotFound("Fatura bulunamadı"));
 
                 var invoiceDto = _mapper.Map<InvoiceHeaderDto>(invoice);
-                return invoiceDto;
+                return GenericResult<InvoiceHeaderDto>.Success(invoiceDto);
             }
             catch (Exception ex)
             {
 
-                throw new Exception("An error occurred while adding the invoice.", ex);
+                return GenericResult<InvoiceHeaderDto>.Failure(Error.InternalServerError($"Fatura alınırken bir hata oluştu: {ex.Message}"));
             }
         }
     }
