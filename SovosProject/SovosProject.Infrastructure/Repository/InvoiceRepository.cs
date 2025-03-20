@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SovosProject.Core.Aggregates.Entities;
+using SovosProject.Core.Entities;
+using SovosProject.Core.Repository;
 using SovosProject.Infrastructure.Data;
 
 namespace SovosProject.Infrastructure.Repository
