@@ -22,7 +22,7 @@ namespace SovosProject.Application.Services
             {
                 if (value == null) throw new ArgumentNullException(nameof(value), "parameters invoice not found");
                 var invoiceHeader = _mapper.Map<InvoiceHeader>(value);
-                await _invoiceRepository.AddAsync(invoiceHeader);
+                await _invoiceRepository.AddInvoiceAsync(invoiceHeader);
             }
             catch (Exception ex)
             {
