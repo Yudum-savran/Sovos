@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SovosProject.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using SovosProject.Infrastructure.Data;
 namespace SovosProject.Infrastructure.Migrations
 {
     [DbContext(typeof(SovosProjectDbContext))]
-    partial class SovosProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250320154840_AddProcessed")]
+    partial class AddProcessed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
