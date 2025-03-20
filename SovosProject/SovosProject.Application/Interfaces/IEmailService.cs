@@ -1,9 +1,10 @@
-﻿using SovosProject.Application.Models;
+﻿using SovosProject.Application.Common;
+using SovosProject.Application.Models;
 
 namespace SovosProject.Application.Interfaces
 {
     public interface IEmailService
     {
-        Task SendEmailAsync(MailLogDto mailLogDto);
+        Task<GenericResult<bool>> SendEmailAsync(MailLogDto mailLogDto);
     }
 }
