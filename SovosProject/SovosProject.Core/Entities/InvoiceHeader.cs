@@ -1,4 +1,6 @@
-﻿namespace SovosProject.Core.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SovosProject.Core.Entities
 {
     public class InvoiceHeader
     {
@@ -10,6 +12,9 @@
         public string Email { get; set; }
         public List<InvoiceLine> InvoiceLines { get; set; } = new();
         public string Processed { get; set; }
+
+        [NotMapped]
+        public int ProductCount => InvoiceLines.Count;
 
         public InvoiceHeader(string invoiceId, string senderTitle, string receiverTitle, DateTime date, string email, string processed)
         {

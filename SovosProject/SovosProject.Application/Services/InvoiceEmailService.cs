@@ -1,5 +1,10 @@
-﻿using SovosProject.Application.Interfaces;
+﻿using Microsoft.Extensions.Options;
+using MimeKit;
+using SovosProject.Application.Email;
+using SovosProject.Application.Interfaces;
+using MailKit.Net.Smtp;
 using SovosProject.Application.Models;
+using SovosProject.Core.Entities;
 using SovosProject.Core.Repository;
 
 
@@ -26,7 +31,7 @@ namespace SovosProject.Application.Services
                 var bodyText = $"""
                   <html>
                   <body>
-                      <p>{invoice.InvoiceLines.Count} kalem ürün içeren {invoice.InvoiceId} nolu faturanız başarıyla işlenmiştir.</p>
+                      <p>{invoice.ProductCount} kalem ürün içeren {invoice.InvoiceId} nolu faturanız başarıyla işlenmiştir.</p>
                   </body>
                   </html>
                   """;
