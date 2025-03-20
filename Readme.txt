@@ -17,3 +17,21 @@ SovosProject.Application: Uygulama iş mantığını içerir. Servisler, Automap
 SovosProject.Infrastructure: Veritabanı erişimi, repository yapıları, dış servis entegrasyonları gibi altyapısal işlemleri içerir.
 WebAPI: Kullanıcıya API hizmetleri sağlayan katmandır.
 SovosProject.Tests: Birim testler ve entegrasyon testlerini içerir.
+
+Kurulum ve Çalıştırma
+
+=> Gerekli Bağımlılıkların Yüklenmesi  
+   dotnet restore
+
+=> Veritabanı Güncellenmesi
+   Entity Framework Core ile veritabanı şemasını oluşturmak/güncellemek için
+   dotnet ef database update --project SovosProject.Infrastructure
+
+=>  Uygulamayı Çalıştırma
+    dotnet run --project WebAPI
+
+=> API'yi Swagger UI üzerinden test edilebilir.
+
+
+Loglama
+Serilog entegrasyonu ile loglar console, seq arayüzü üzerinden control sağlanabilir. Loglar appsettings.json üzerinden yapılandırılabilir.
