@@ -1,6 +1,4 @@
-﻿using SovosProject.Core.Aggregates.Entities;
-
-namespace SovosProject.Application.Models
+﻿namespace SovosProject.Application.Models
 {
     public class InvoiceLineDto
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SovosProject.Application.Models;
-using SovosProject.Core.Aggregates.Entities;
+using SovosProject.Core.Entities;
 
 namespace SovosProject.Application.AutoMappers
 {

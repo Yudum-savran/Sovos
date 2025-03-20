@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using SovosProject.Application.Interfaces;
 using SovosProject.Application.Models;
-using SovosProject.Core.Aggregates.Entities;
+using SovosProject.Core.Entities;
 using SovosProject.Core.Repository;
 
 namespace SovosProject.Application.Services

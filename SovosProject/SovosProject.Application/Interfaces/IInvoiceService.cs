@@ -1,5 +1,4 @@
 ﻿using SovosProject.Application.Models;
-using SovosProject.Core.Aggregates.Entities;
 
 namespace SovosProject.Application.Interfaces
 {
