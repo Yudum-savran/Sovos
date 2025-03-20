@@ -9,7 +9,6 @@
         public DateTime Date { get;  set; }
         public string Email { get;  set; }
         public List<InvoiceLineDto> InvoiceLines { get; set; } = new();
-
-        public int TotalItems => InvoiceLines.Count;
+        public string IsProcessed { get; set; }
     }
 }
