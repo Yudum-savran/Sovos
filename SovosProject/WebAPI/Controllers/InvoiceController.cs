@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
         {
             _logger.LogInformation("GetAllInvoices metoduna başlandı.");
             var invoices = await _invoiceService.GetAllInvoicesAsync();
-            if(invoices==null || invoices.Any())
+            if(invoices.IsSuccess || !invoices.Value.Any())
             {
                 _logger.LogWarning("Fatura listesi boş veya null döndü.");
             }
@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
             var invoice = await _invoiceService.GetInvoiceByIdAsync(invoiceId);
             if (invoice == null)
             {
-                _logger.LogWarning("Bu idye ait fatıra bulunamadı");
+                _logger.LogWarning("Bu idye ait fatura bulunamadı");
             }
             _logger.LogInformation("Invoice başarıyla getirildi. InvoiceId: {InvoiceId}", invoiceId);
             return Ok(invoice);
