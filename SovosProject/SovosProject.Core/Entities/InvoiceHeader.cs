@@ -9,14 +9,16 @@
         public DateTime Date { get; set; }
         public string Email { get; set; }
         public List<InvoiceLine> InvoiceLines { get; set; } = new();
+        public string Processed { get; set; }
 
-        public InvoiceHeader(string invoiceId, string senderTitle, string receiverTitle, DateTime date, string email)
+        public InvoiceHeader(string invoiceId, string senderTitle, string receiverTitle, DateTime date, string email, string processed)
         {
             InvoiceId = invoiceId;
             SenderTitle = senderTitle;
             ReceiverTitle = receiverTitle;
             Date = date;
             Email = email;
+            Processed = processed;
         }
     }
 }
