@@ -1,5 +1,4 @@
-﻿using SovosProject.Application.Email;
-using SovosProject.Application.Models;
+﻿using SovosProject.Application.Models;
 
 namespace SovosProject.Application.Interfaces
 {
